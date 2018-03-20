@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<style>
+#container {
+  margin:auto;
+  width: 900px;
+  height: 500px;
+  position: relative;
+  background: yellow;
+}
+.animate {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  background-color: red;
+}
+</style>
+<body>
+
+<p>
+<!-- onclick="myMove()"  -->
+
+<input type="text" id = "hello" value="">
+</p>
+
+<div id ="container">
+<div class ="animate"></div>
+<div class ="animate"></div>
+<div class ="animate"></div>
+<div class ="animate"></div>
+</div>
+
+<script>
+
+/*
+*******UP   1
+*******DOWN 2
+******RIGHT 4
+*******LEFT 3
+*/
+  var flag = 3;
+  var elem = document.getElementsByClassName("animate");
+  var xtop = 250,left = 450;
+  document.getElementById("hello").onkeydown = function() {keyD(event);};
+  var id = setInterval(frame, 10);
+  elem[0].style.top = xtop + 'px';
+  elem[0].style.left = left + 'px';
+  elem[1].style.top = xtop + 'px';
+  elem[1].style.left = left + 'px';
+  elem[2].style.top = xtop + 'px';
+  elem[2].style.left = left + 'px';
+  elem[3].style.top = xtop + 'px';
+  elem[3].style.left = left + 'px';
+
+  function keyD(e)
+  {
+    if(e.keyCode == 38)
+    {
+      if(elem[0].style.top == "0px");
+      else
+      {
+        flag = 1;
+          // xtop-=10;
+          // elem.style.top = xtop + "px";
+      }
+
+    }
+    if(e.keyCode == 40)
+    {
+      if(elem[0].style.top == "480px");
+      else
+      {
+        flag = 2;
+          // xtop+=10;
+          // elem.style.top = xtop + "px";
+      }
+    }
+    if(e.keyCode == 37)
+    {
+      if(elem[0].style.left == "0px");
+      else
+      {
+        flag = 3;
+          // left-=10;
+          // elem.style.left = left + "px";
+      }
+
+    }
+    if(e.keyCode == 39)
+    {
+      if(elem[0].style.left == "880px");
+      else
+      {
+        flag = 4;
+          // left+=10;
+          // elem.style.left = left + "px";
+      }
+    }
+
+  }
+
+  function frame() {
+
+    if(xtop == 0 && flag == 1)
+    {
+      xtop = 480;
+    }
+    if(xtop == 480 && flag == 2)
+    {
+      xtop = 0;
+    }
+    if(left == 0 && flag == 3)
+    {
+      left = 880;
+    }
+    if(left == 880 && flag == 4)
+    {
+      left = 0;
+    }
+
+    if(flag == 1)
+    {
+      xtop--;
+    }
+    if(flag == 2)
+    {
+      xtop++;
+    }
+    if(flag == 3)
+    {
+      left--;
+    }
+    if(flag == 4)
+    {
+      left++;
+    }
+    elem[0].style.top = xtop + 'px';
+    elem[0].style.left = left + 'px';
+  }
+
+</script>
+
+</body>
+</html>

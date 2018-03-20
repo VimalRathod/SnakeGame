@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<style>
+#container {
+  margin:auto;
+  width: 900px;
+  height: 500px;
+  position: relative;
+  background: yellow;
+}
+.animate {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  background-color: red;
+}
+</style>
+<body>
+
+<p>
+<!-- onclick="myMove()"  -->
+
+<input type="text" id = "hello" value="">
+</p>
+
+<div id ="container">
+<div class ="animate"></div>
+<div class ="animate"></div>
+<div class ="animate"></div>
+<div class ="animate"></div>
+<div class ="animate"></div>
+<div class ="animate"></div>
+<div class ="animate"></div>
+</div>
+
+<script>
+
+/*
+*******UP   1
+*******DOWN 2
+******RIGHT 4
+*******LEFT 3
+*/
+  var flag = [3,0,0,0,0,0,0];
+  var elem = document.getElementsByClassName("animate");
+  var xtop = [250,250,250,250,250,250,250] ;
+  var left = [450,450,450,450,450,450,450];
+  document.getElementById("hello").onkeydown = function() {keyD(event);};
+  var id = setInterval(frame, 20);
+
+  function keyD(e)
+  {
+    if(e.keyCode == 38)
+    {
+      if(elem[0].style.top == "0px");
+      else if(flag[0]!=2)
+      {
+        flag[0] = 1;
+          // xtop-=10;
+          // elem.style.top = xtop + "px";
+      }
+
+    }
+    if(e.keyCode == 40)
+    {
+      if(elem[0].style.top == "480px");
+      else if(flag[0]!=1)
+      {
+        flag[0] = 2;
+          // xtop+=10;
+          // elem.style.top = xtop + "px";
+      }
+    }
+    if(e.keyCode == 37)
+    {
+      if(elem[0].style.left == "0px");
+      else if(flag[0]!=4)
+      {
+        flag[0] = 3;
+          // left-=10;
+          // elem.style.left = left + "px";
+      }
+
+    }
+    if(e.keyCode == 39)
+    {
+      if(elem[0].style.left == "880px");
+      else if(flag[0]!=3)
+      {
+        flag[0] = 4;
+          // left+=10;
+          // elem.style.left = left + "px";
+      }
+    }
+
+  }
+
+  function frame() {
+
+    for(var i = 0 ; i< elem.length;i++)
+    {
+      if(i != elem.length -1)
+      {
+        if(left[i] - left[i+1] > 20 && flag[i] == 4)
+        {
+          flag[i+1] = 4;
+        }
+        if(left[i] - left[i+1] < -20 && flag[i] == 3)
+        {
+          flag[i+1] = 3;
+        }
+        if(xtop[i] - xtop[i+1] > 20 && flag[i] == 2)
+        {
+          flag[i+1] = 2;
+        }
+        if(xtop[i] - xtop[i+1] < -20 && flag[i] == 1)
+        {
+          flag[i+1] = 1;
+        }
+      }
+
+
+      if(xtop[i] == 0 && flag[i] == 1)
+      {
+        xtop[i] = 480;
+      }
+      if(xtop[i] == 480 && flag[i] == 2)
+      {
+        xtop[i] = 0;
+      }
+      if(left[i] == 0 && flag[i] == 3)
+      {
+        left[i] = 880;
+      }
+      if(left[i] == 880 && flag[i] == 4)
+      {
+        left[i] = 0;
+      }
+
+      if(flag[i] == 1)
+      {
+        xtop[i]-=1;
+      }
+      if(flag[i] == 2)
+      {
+        xtop[i]+=1;
+      }
+      if(flag[i] == 3)
+      {
+        left[i]-=1;
+      }
+      if(flag[i] == 4)
+      {
+        left[i]+=1;
+      }
+
+      elem[i].style.top = xtop[i] + 'px';
+      elem[i].style.left = left[i] + 'px';
+    }
+
+  }
+
+</script>
+
+</body>
+</html>
